@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="blog,hexo,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="CooDee" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="最近把论文反反复复改了好几次,今天总算是接近终极版了.下午从公司回来后,我便开始动手改造我的Bolg–从Jekyll搬到Hexo.这里记录今天折腾Hexo时遇到的一些坑. Hexohexo出自台湾大学生SkyArrow之手,是一个快速、简洁且高效的博客框架.虽然jekyll已经挺方便简洁了,不过试试强大的hexo也是极好的. Hexo官网强调了四点:   极速生成静态页面 支持Markdown 一">
+<meta name="keywords" content="blog,hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blog从jekyll搬到Hexo">
+<meta property="og:url" content="https://cd2want.cc/2016/06/03/从jekyll搬到Hexo/index.html">
+<meta property="og:site_name" content="CooDee">
+<meta property="og:description" content="最近把论文反反复复改了好几次,今天总算是接近终极版了.下午从公司回来后,我便开始动手改造我的Bolg–从Jekyll搬到Hexo.这里记录今天折腾Hexo时遇到的一些坑. Hexohexo出自台湾大学生SkyArrow之手,是一个快速、简洁且高效的博客框架.虽然jekyll已经挺方便简洁了,不过试试强大的hexo也是极好的. Hexo官网强调了四点:   极速生成静态页面 支持Markdown 一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2016-08-16T10:09:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blog从jekyll搬到Hexo">
+<meta name="twitter:description" content="最近把论文反反复复改了好几次,今天总算是接近终极版了.下午从公司回来后,我便开始动手改造我的Bolg–从Jekyll搬到Hexo.这里记录今天折腾Hexo时遇到的一些坑. Hexohexo出自台湾大学生SkyArrow之手,是一个快速、简洁且高效的博客框架.虽然jekyll已经挺方便简洁了,不过试试强大的hexo也是极好的. Hexo官网强调了四点:   极速生成静态页面 支持Markdown 一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cd2want.cc/2016/06/03/从jekyll搬到Hexo/">
+
+
+
+
+
+  <title>Blog从jekyll搬到Hexo | CooDee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CooDee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cd2want.cc/2016/06/03/从jekyll搬到Hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CooDee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CooDee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Blog从jekyll搬到Hexo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-03T23:42:35+08:00">
+                2016-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/06/03/从jekyll搬到Hexo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/03/从jekyll搬到Hexo/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近把论文反反复复改了好几次,今天总算是接近终极版了.下午从公司回来后,<br>我便开始动手改造我的Bolg–从Jekyll搬到Hexo.这里记录今天折腾Hexo时遇到的一些坑.</p>
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><p>hexo出自台湾大学生SkyArrow之手,是一个快速、简洁且高效的博客框架.虽然jekyll已经挺方便简洁<br>了,不过试试强大的hexo也是极好的.</p>
+<p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo官网</a>强调了四点:</p>
+<blockquote>
+<ul>
+<li>极速生成静态页面</li>
+<li>支持Markdown</li>
+<li>一键部署博客</li>
+<li>丰富的插件支持</li>
+</ul>
+</blockquote>
+<p>这四点就说明了hexo就是为了效率而生的,感谢SkyArrow大牛!!</p>
+<h1 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">Hexo安装</a></h1><p>Hexo安装在官网可以找到详细的步骤,首先得安装Node.js和Git,Mac用户系统自带有git,接着安装Hexo就只<br>需要一条命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>接着就能建站了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init myblog  //将会创建myblog文件夹,包含hexo初始文件和一个默认的theme.</span><br><span class="line">$ cd myblog</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<p>在_config.yml中可以配置自己的信息,接下来可以先在本地运行hexo看看效果.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate  //生成网页 也可以使用 hexo g </span><br><span class="line">hexo server    //启动服务器 也可以使用 hexo s</span><br></pre></td></tr></table></figure>
+<p>这时大概会看到这样的东东:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd2want hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Files loaded in 1.87 s</span><br><span class="line">INFO  Generated: about/index.html</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">INFO  Generated: atom.xml</span><br><span class="line">INFO  23 files generated in 394 ms</span><br><span class="line">➜  cd2want hexo s</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<p>这时打开浏览器,输入 0.0.0.0:4000即(localhost:4000)就可以看到hexo的博客网页了.<br>到这里一个hexo博客的创建就完成了.</p>
+<h1 id="几个坑"><a href="#几个坑" class="headerlink" title="几个坑"></a>几个坑</h1><p>创建一个hexo博客并没有什么难度,然而后续的坑并不少.</p>
+<h2 id="莫名错误"><a href="#莫名错误" class="headerlink" title="莫名错误"></a>莫名错误</h2><p>当我写了个test.md放进去后,运行hexo g,接着hexo并不满意我的test,向我抛出了一堆异常:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  cd2want hexo g</span><br><span class="line">FATAL Cannot read property &apos;replace&apos; of null</span><br><span class="line">TypeError: Cannot read property &apos;replace&apos; of null</span><br><span class="line">    at /Users/CD/Project/Blog/cd2want/node_modules/hexo/lib/hexo/load_config.js:35:28</span><br><span class="line">    ...</span><br><span class="line">    at Immediate.Async.drainQueues [as _onImmediate] (/Users/CD/Project/Blog/cd2want/node_modules/hexo/node_modules/bluebird/js/release/async.js:17:14)</span><br><span class="line">    at processImmediate [as _immediateCallback] (timers.js:383:17)</span><br></pre></td></tr></table></figure>
+<p>这尼玛是什么玩意…我感觉google,hexo的github上的issue有一条相似的问题,解决方案是安装插件.oh?我赶紧试一试.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">➜  cd2want npm install hexo-renderer-jade --save</span><br><span class="line">npm WARN deprecated jade@1.11.0: Jade has been renamed to pug, please install the latest version of pug instead of jade</span><br><span class="line">npm WARN deprecated transformers@2.1.0: Deprecated, use jstransformer</span><br><span class="line">hexo-renderer-jade@0.3.0 node_modules/hexo-renderer-jade</span><br><span class="line">└── jade@1.11.0 (commander@2.6.0, character-parser@1.2.1, void-elements@2.0.1, constantinople@3.0.2, with@4.0.3, mkdirp@0.5.1, clean-css@3.4.16, jstransformer@0.0.2, transformers@2.1.0, uglify-js@2.6.2)</span><br><span class="line">➜  cd2want npm install hexo-renderer-sass --save</span><br><span class="line">npm WARN deprecated cross-spawn-async@2.2.4: cross-spawn no longer requires a build toolchain, use it instead!</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>然并软,还是一样的报错,在我又试了几个相关解决方案后,决定重新init一次,然后就好了.莫名其妙です.</p>
+<h2 id="config-yml配置不当"><a href="#config-yml配置不当" class="headerlink" title="config.yml配置不当"></a>config.yml配置不当</h2><p>我遇到第二个坑就是,当我配置_config.yml中的deploy时发生的.<br>下面是deploy的正确配置(我使用的hexo的版本是3.2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  repository: http://github.com/wangchaodong/wangchaodong.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>就这么几行能有坑? 有的…</p>
+<p>一开始我在type后面写的是github,hexo报错了,因为hexo在3.0版本后type修改成了git,<br>之前的版本使用的是github.然而我改成了git后,hexo依然不给面子继续报错,后来发现原因是<br>type后面我没给空格.Jesus~眼癌晚期. hexo配置的文件对空格很严格.</p>
+<h2 id="标准MarkDown"><a href="#标准MarkDown" class="headerlink" title="标准MarkDown"></a>标准MarkDown</h2><p>当我把我在jekyll下的post放到hexo里,generate后,提示了render渲染错误.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  cd2want hexo g</span><br><span class="line">INFO  Start processing</span><br><span class="line">FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span><br><span class="line">Template render error: (unknown path) [Line 14, Column 2]</span><br><span class="line">  unknown block tag: highlight</span><br></pre></td></tr></table></figure>
+<p>unknown block tag: highlight. 摁~貌似是hexo渲染时有语法的错误,我就回去看我的post,<br>发现原来之前使用jekyll时,代码部分使用的markdown语法高亮不是标准的markdown,<br>所以报错了.逐一改之,再generate,server.搞定!!</p>
+<p>还发现一点就是post有多个标签时用空格是不行的,需要这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tags: [tag1,tag2,tag3]</span><br></pre></td></tr></table></figure>
+<h1 id="hexo命令"><a href="#hexo命令" class="headerlink" title="hexo命令"></a>hexo命令</h1><p>常用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;postName&quot; #新建文章</span><br><span class="line">hexo new page &quot;pageName&quot; #新建页面</span><br><span class="line">hexo generate #生成静态页面至public目录</span><br><span class="line">hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</span><br><span class="line">hexo deploy #将.deploy目录部署到GitHub</span><br></pre></td></tr></table></figure>
+<p>常用复合命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy -g</span><br><span class="line">hexo server -g</span><br><span class="line">简写：</span><br><span class="line"></span><br><span class="line">hexo n == hexo new</span><br><span class="line">hexo g == hexo generate</span><br><span class="line">hexo s == hexo server</span><br><span class="line">hexo d == hexo deploy</span><br></pre></td></tr></table></figure>
+<h1 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h1><!-- hollylee.red 这个域名现在只是我的一个回忆,而回忆往往是不宜公开的 -->
+<p>搭建配置好hexo后,莫名其妙就想注册一个域名,本想注册.com的域名,不幸的是已被人注册了,后来发现有cd2want.cc的域名,感觉会很有意思,而且价格不高,于是果断注册了cd2want.cc买了一年.<br>我的blog是由github Page托管,所以只要在github的项目里面添加CNAME,在CNAME中加入注册好的域名.然后在域名服务商设置DNS,这样就把自己的域名绑定到blog了.就可以使用自己的域名进入blog了.不过我到是等了将近半个钟才能进入blog,貌似是DNS解析比较慢的原因.</p>
+<h1 id="Last"><a href="#Last" class="headerlink" title="Last"></a>Last</h1><p>现在还有一个问题就是disqus无法显示,这个明天来搞定吧~<br>bty,我是使用这个hexo主题–<a href="https://github.com/tufu9441/maupassant-hexo" target="_blank" rel="noopener">链接</a>,感觉很符合我喜欢的简约风格.</p>
+<p>天气越来越热,人也跟着躁动,但更应该静下心好好思考,把每天学到的东西,悟到的道理记录下来.<br>以后多多blogging吧!!</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/blog/" rel="tag"># blog</a>
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/22/befour-graduation/" rel="next" title="毕业前的无趣">
+                <i class="fa fa-chevron-left"></i> 毕业前的无趣
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/06/使用SpriteKit做一个FlappyHaru小游戏/" rel="prev" title="初识SpriteKit:做一个FlappyHaru小游戏">
+                初识SpriteKit:做一个FlappyHaru小游戏 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="CooDee">
+            
+              <p class="site-author-name" itemprop="name">CooDee</p>
+              <p class="site-description motion-element" itemprop="description">stay hungry, stay foolish</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangchaodong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/gua_reborn" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo"><span class="nav-number">1.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo安装"><span class="nav-number">2.</span> <span class="nav-text">Hexo安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个坑"><span class="nav-number">3.</span> <span class="nav-text">几个坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#莫名错误"><span class="nav-number">3.1.</span> <span class="nav-text">莫名错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-yml配置不当"><span class="nav-number">3.2.</span> <span class="nav-text">config.yml配置不当</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准MarkDown"><span class="nav-number">3.3.</span> <span class="nav-text">标准MarkDown</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo命令"><span class="nav-number">4.</span> <span class="nav-text">hexo命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#域名"><span class="nav-number">5.</span> <span class="nav-text">域名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Last"><span class="nav-number">6.</span> <span class="nav-text">Last</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CooDee</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wangchaodong.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://cd2want.cc/2016/06/03/从jekyll搬到Hexo/';
+          this.page.identifier = '2016/06/03/从jekyll搬到Hexo/';
+          this.page.title = 'Blog从jekyll搬到Hexo';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wangchaodong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
